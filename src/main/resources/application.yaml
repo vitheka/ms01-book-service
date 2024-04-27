@@ -9,6 +9,9 @@ resilience4j:
     instances:
       foo-bar:
         max-attempts: 5
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 spring:
   application:
     name: ms01-book-service
@@ -28,3 +31,16 @@ spring:
     schemas: book_service
     user: root
     password: 1234
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # para enviar 100% da amostra
+    propagation:
+      type: w3c
+    baggage:
+      enabled: true
+    enabled: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans # alterar o endereco do Zipkin
+

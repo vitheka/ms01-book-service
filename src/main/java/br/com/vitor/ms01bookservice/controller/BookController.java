@@ -1,8 +1,10 @@
 package br.com.vitor.ms01bookservice.controller;
 
+import br.com.vitor.ms01bookservice.exception.BookNotFoundException;
 import br.com.vitor.ms01bookservice.proxy.CambioProxy;
 import br.com.vitor.ms01bookservice.repository.BookRepository;
 import br.com.vitor.ms01bookservice.domain.Book;
+import io.micrometer.observation.annotation.Observed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +33,12 @@ public class BookController {
     private  CambioProxy proxy;
 
 
+    @Observed
     @Operation(summary = "Get Cambio from currency")
     @GetMapping("/{id}/{currency}")
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency) {
 
-        var book = repository.findById(id).orElseThrow(() -> new RuntimeException("Book Not found"));
+        var book = repository.findById(id).orElseThrow(() -> new BookNotFoundException("Book Not found"));
 
         var port = environment.getProperty("local.server.port");
         book.setEnvironment(port);
