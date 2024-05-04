@@ -3,6 +3,7 @@ package br.com.vitor.ms01bookservice.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -16,6 +17,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Book implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @EqualsAndHashCode.Include
     @Id
