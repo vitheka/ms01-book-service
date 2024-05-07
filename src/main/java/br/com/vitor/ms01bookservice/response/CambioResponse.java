@@ -1,9 +1,7 @@
 package br.com.vitor.ms01bookservice.response;
 
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Builder

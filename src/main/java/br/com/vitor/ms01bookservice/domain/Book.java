@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -32,12 +33,5 @@ public class Book implements Serializable {
     private Double price;
     @Column(nullable = false)
     private String title;
-
-    //TODO removes
-    @Transient
-    private String currency;
-    @Transient
-    private String environment;
-    //end to-do
 
 }
