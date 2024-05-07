@@ -17,9 +17,9 @@ spring:
     name: ms01-book-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3311/mysql?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true&permitMysqlScheme=true
-    username: root
-    password: example
+    url: jdbc:mysql://localhost:${MYSQL_DEFAULT_PORT:3311}/book_service?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true&permitMysqlScheme=true
+    username: ${ROOT_USER:root}
+    password: ${ROOT_PASSWORD:example}
   jackson:
     default-property-inclusion: NON_NULL
   jpa:
@@ -27,9 +27,9 @@ spring:
       ddl-auto: update
     show-sql: true
   flyway:
-    url: jdbc:mysql://localhost:3311/mysql?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true&permitMysqlScheme=true
-    user: root
-    password: example
+    url: jdbc:mysql://localhost:${MYSQL_DEFAULT_PORT:3311}/book_service?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true&permitMysqlScheme=true
+    user: ${ROOT_USER:root}
+    password: ${ROOT_PASSWORD:example}
     baseline-on-migrate: true
 management:
   tracing:
