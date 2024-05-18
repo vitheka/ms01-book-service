@@ -1,0 +1,1 @@
+insert into book (id,author,launch_date,price,title) values (2,'Oda',NOW(),10.8,'One Piece')

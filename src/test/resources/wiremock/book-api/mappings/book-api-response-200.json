@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/v1/cambio-service/10/USD/BRL"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "wiremock-get-one-book-price-converted-200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

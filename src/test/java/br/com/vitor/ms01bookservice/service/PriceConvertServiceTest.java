@@ -1,19 +1,15 @@
 package br.com.vitor.ms01bookservice.service;
 
+import br.com.vitor.ms01bookservice.commons.BookUtils;
+import br.com.vitor.ms01bookservice.commons.CambioUtils;
 import br.com.vitor.ms01bookservice.domain.Book;
 import br.com.vitor.ms01bookservice.proxy.CambioProxy;
-import br.com.vitor.ms01bookservice.repository.BookRepository;
 import br.com.vitor.ms01bookservice.response.CambioResponse;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -24,6 +20,11 @@ class PriceConvertServiceTest {
 
     @InjectMocks
     private PriceConvertService priceConvertService;
+
+    @InjectMocks
+    private BookUtils bookUtils;
+    @InjectMocks
+    private CambioUtils cambioUtils;
 
     @Mock
     private CambioProxy cambioProxy;
@@ -40,21 +41,9 @@ class PriceConvertServiceTest {
     @BeforeEach
     void init() {
 
-        cambioInit = CambioResponse.builder()
-                .id(10L)
-                .from("USD")
-                .to("BRL")
-                .conversionFactor(BigDecimal.valueOf(5))
-                .convertedValue(50.8)
-                .build();
+        cambioInit = cambioUtils.newCambio();
 
-        bookInit = Book.builder()
-                .id(1L)
-                .author("Oda")
-                .title("One Piece")
-                .launchDate(LocalDateTime.now())
-                .price(10.80)
-                .build();
+        bookInit = bookUtils.newBook();
     }
 
     @Test

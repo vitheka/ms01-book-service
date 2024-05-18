@@ -1,17 +1,22 @@
 package br.com.vitor.ms01bookservice.service;
 
 
+import br.com.vitor.ms01bookservice.commons.BookUtils;
 import br.com.vitor.ms01bookservice.domain.Book;
 import br.com.vitor.ms01bookservice.exception.BookNotFoundException;
 import br.com.vitor.ms01bookservice.repository.BookRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +30,9 @@ class BookServiceTest {
     @InjectMocks
     private BookService bookService;
 
+    @InjectMocks
+    private BookUtils bookUtils;
+
     @Mock
     private BookRepository repository;
 
@@ -33,14 +41,7 @@ class BookServiceTest {
     @BeforeEach
     void init() {
 
-
-        bookInit = Book.builder()
-                .id(1L)
-                .author("Oda")
-                .title("One Piece")
-                .launchDate(LocalDateTime.now())
-                .price(10.80)
-                .build();
+        bookInit = bookUtils.newBook();
     }
 
     @Test
